@@ -7,7 +7,7 @@ import openai
 openai.api_key = {OPENAI API KEY}
 
 # Enjigraph APIから最新情報を取得
-url = "https://api.enji-graph.com/v1/data?q="+urllib.parse.quote("自動運転")+"&lang=ja&filter=domainAuthority"
+url = "https://api.enjigraph.com/v1/data?q="+urllib.parse.quote("自動運転")+"&lang=ja&filter=domainAuthority"
 req = urllib.request.Request(url)
 req.add_header("X-ENJI-API-KEY",{ENJIGRAPH API KEY})
 

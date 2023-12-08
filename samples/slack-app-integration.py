@@ -5,7 +5,7 @@ import json
 headers = {"Content-Type" : "application/json","Authorization": "Bearer {BOT USER OAUTH TOKEN}"}
 
 # Enjigraph APIから最新情報を取得
-url = "https://api.enji-graph.com/v1/data?q=ChatGPT&lang=ja&filter=domainAuthority&num=10"
+url = "https://api.enjigraph.com/v1/data?q=ChatGPT&lang=ja&filter=domainAuthority&num=10"
 
 req = urllib.request.Request(url)
 req.add_header("X-ENJI-API-KEY",{ENJIGRAPH API KEY})
