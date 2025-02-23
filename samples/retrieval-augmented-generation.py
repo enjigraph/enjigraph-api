@@ -1,4 +1,3 @@
-# coding: UTF-8
 import urllib.request
 import urllib.parse
 import json
@@ -7,7 +6,7 @@ import openai
 openai.api_key = {OPENAI API KEY}
 
 # Enjigraph APIから最新情報を取得
-url = "https://api.enjigraph.com/v1/data?q="+urllib.parse.quote("自動運転")+"&lang=ja&filter=domainAuthority"
+url = "https://api.enjigraph.com/v1/data?q="+urllib.parse.quote("自動運転")+"&lang=ja"
 req = urllib.request.Request(url)
 req.add_header("X-ENJI-API-KEY",{ENJIGRAPH API KEY})
 
@@ -17,7 +16,7 @@ with urllib.request.urlopen(req) as res:
     # OpenAI APIに、質問文と最新情報を送信し、回答を生成
     information = ""
     for data in body["data"]:
-        information += "title:"+str(data["title"])+" description:"+str(data["description"])+"\n"
+        information += "title:"+str(data["title"])+"\n"
     
     role = """
     #命令文

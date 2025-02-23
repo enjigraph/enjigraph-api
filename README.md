@@ -25,18 +25,17 @@ curl -H 'X-ENJI-API-KEY : {API KEY}' https://api.enjigraph.com/v1/data
 ## リクエストパラメーター
 | パラメーター | デフォルト | 概要 |
 | ---- | ---- | ---- |
-| num | 100 | 取得する情報数を指定できます。<br>デフォルトは100、最大は1000です。 |
+| q | null | 検索キーワードを指定してください。必須パラメータになります。 |
+| num | 100 | 取得する情報数を指定できます。<br>デフォルトは100、最大は100です。 |
 | from | null | 取得する情報の公開日の範囲を指定できます。<br>最も古い公開日を指定できます。(ISO 8601形式)<br><br>qとfilterを同時に指定した場合、fromは指定できません。 |
 | to | null | 取得する情報の公開日の範囲を指定できます。<br>最も新しい公開日を指定できます。(ISO 8601形式)<br><br>qとfilterを同時に指定した場合、toは指定できません。 |
 | sortOrder | desc | 情報の並び替えを指定できます。<br>昇順にする場合は「asc」を、降順にする場合は「desc」を指定してください。<br>現在、情報は公開日によって並び替えられています。<br><br>qとfilterを同時に指定した場合、sortOrderは指定できません。  |
 | lang | 日本語と英語 | 取得する情報の言語を指定できます。<br>「ja」あるいは「en」が指定できます。 | 
-| q | null | 検索キーワードを指定できます。 |
 | domains | null | 取得する情報のドメインを指定できます。<br>複数ドメインを指定したい場合は、domains=www.enjigraph.com,blog.enjigraph.com のように、カンマ区切りで列挙してください。<br><br>※filterとの併用はできません。 |
-| filter | null | 現在は、「domainAuthority」のみ指定可能で、ドメインパワーが一定以上の情報を取得できます。<br><br>※domainsとの併用はできません。 |
 
 cURLを使った例:
 ```
-curl -H 'X-ENJI-API-KEY : {API KEY}' 'https://api.enjigraph.com/v1/data?num=200&from=2023-08-01&to=202308-20'
+curl -H 'X-ENJI-API-KEY : {API KEY}' 'https://api.enjigraph.com/v1/data?q=AI&num=50&from=2023-08-01&to=202308-20'
 ```
 
 Pythonを使った例:
@@ -50,9 +49,7 @@ headers = {
 }
 
 params = {
-    "num": 100,
     "q": "AI",
-    "filter": "domainAuthority"
 }
 
 response = requests.get(url, headers=headers, params=params)
@@ -77,7 +74,7 @@ else:
            lang: "ja"
         }
     ],
-    totalResults: 1000,
+    totalResults: 100,
     monthlyLimit: 10000,
     monthlyRequestCount: 980
 }
@@ -99,6 +96,10 @@ else:
 　API KEYが正しくありません。
 - MonthlyRequestLimit  
 　月間リクエスト数がプラン上限を超えています。
+- MonthlyRequestLimit  
+　月間リクエスト数がプラン上限を超えています。
+- BadRequest  
+　検索キーワードを設定してください。
 
 
 
