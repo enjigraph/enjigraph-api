@@ -16,7 +16,7 @@ with urllib.request.urlopen(req) as res:
     # OpenAI APIに、質問文と最新情報を送信し、回答を生成
     information = ""
     for data in body["data"]:
-        information += "title:"+str(data["title"])+"\n"
+        information += "title:"+str(data["title"])+" description:"+str(data["description"])+"\n"
     
     role = """
     #命令文
